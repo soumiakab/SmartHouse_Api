@@ -48,7 +48,7 @@ public class HouseServiceImpl implements HouseServiceI {
 
             exitingHouse.setName(house.getName());
 
-            return houseRepository.save(exitingHouse);
+            return houseRepository.save(house);
         }
         else
             throw new MongoException("Record not found");

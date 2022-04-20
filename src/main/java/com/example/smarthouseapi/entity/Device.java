@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -20,6 +21,13 @@ public class Device {
 
     private StatusEnum status;
     private Long number;
-    private Floor floor;
+
+    @DBRef
     private Room room;
+
+    @DBRef
+    private Floor floor;
+
+    @DBRef
+    private House house;
 }

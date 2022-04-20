@@ -24,8 +24,8 @@ public class SmartHouseApiApplication implements CommandLineRunner {
     public  void  run(String... args) throws  Exception{
 
         if (houseRepository.findAll().isEmpty()){
-            houseRepository.save(new House("houseName"));
-            houseRepository.save(new House("houseName2"));
+            houseRepository.save(new House("new1"));
+            houseRepository.save(new House("new2"));
         }
     }
 

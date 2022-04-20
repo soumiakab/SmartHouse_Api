@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -21,8 +22,10 @@ public class Floor {
 
     private String name ;
 
-   // private House house;
+    @DBRef
+    private House house;
 
-    //private List<Room> rooms;
+    @DBRef
+    private List<Room> rooms;
 
 }
