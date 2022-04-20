@@ -5,11 +5,13 @@ import com.example.smarthouseapi.repository.LampRepository;
 import com.example.smarthouseapi.service.interfaces.LampServiceI;
 import com.mongodb.MongoException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Service
 public class LampServiceImpl implements LampServiceI {
 
     private final LampRepository lampRepository;

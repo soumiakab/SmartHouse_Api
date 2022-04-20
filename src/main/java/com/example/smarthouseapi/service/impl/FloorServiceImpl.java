@@ -5,11 +5,13 @@ import com.example.smarthouseapi.repository.FloorRepository;
 import com.example.smarthouseapi.service.interfaces.FloorServiceI;
 import com.mongodb.MongoException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Service
 public class FloorServiceImpl implements FloorServiceI {
 
 
