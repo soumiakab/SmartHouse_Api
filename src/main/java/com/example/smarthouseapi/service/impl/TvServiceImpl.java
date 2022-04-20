@@ -1,12 +1,15 @@
 package com.example.smarthouseapi.service.impl;
 
+import com.example.smarthouseapi.entity.Room;
 import com.example.smarthouseapi.entity.Tv;
 import com.example.smarthouseapi.repository.TvRepository;
 import com.example.smarthouseapi.service.interfaces.TvServiceI;
+import com.mongodb.MongoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TvServiceImpl implements TvServiceI {
@@ -25,8 +28,12 @@ public class TvServiceImpl implements TvServiceI {
     }
 
     @Override
-    public Tv getOne(String id){
-        return tvRepository.findById(id).orElse(null);
+    public Optional<Tv> getOne(String id){
+        Optional<Tv> found = tvRepository.findById(id);
+        if (found.isEmpty()) {
+            return Optional.empty();
+        }
+        return found;
     }
 
     @Override
@@ -39,8 +46,13 @@ public class TvServiceImpl implements TvServiceI {
     }
 
     @Override
-    public String deleteTv(String id) {
-        tvRepository.deleteById(id);
-        return "Tv removed !!";
+    public Tv deleteTv(String id) {
+        if (tvRepository.findById(id).isPresent()){
+            Tv tv = tvRepository.findById(id).get();
+            tvRepository.delete(tv);
+            return tv;
+        }
+        else
+            throw new MongoException("Record not found");
     }
 }

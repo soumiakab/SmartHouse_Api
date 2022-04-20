@@ -5,7 +5,6 @@ import com.example.smarthouseapi.service.impl.HouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -23,21 +22,21 @@ public class HouseController {
         return new ResponseEntity<>(houseService.getHouseById(id), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/houses")
+    @PostMapping(value = "/house")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<House> createVehicle(@RequestBody House house){
+    public ResponseEntity<House> createHouse(@RequestBody House house){
         return new ResponseEntity<>(houseService.saveHouse(house), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/houses/{id}")
+    @PutMapping(value = "/house/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<House> updateVehicle(@RequestBody House house, @PathVariable(value = "id") String id){
+    public ResponseEntity<House> updateHouse(@RequestBody House house, @PathVariable(value = "id") String id){
         return new ResponseEntity<>(houseService.updateHouseInfo(id,house), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/houses/{id}")
+    @DeleteMapping(value = "/house/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<House> deleteVehicle(@PathVariable(value="id") String id){
+    public ResponseEntity<House> deleteHouse(@PathVariable(value="id") String id){
         return new ResponseEntity<>(houseService.deleteHouseRecord(id), HttpStatus.OK);
     }
 

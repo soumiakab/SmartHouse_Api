@@ -1,12 +1,15 @@
 package com.example.smarthouseapi.service.impl;
 
+import com.example.smarthouseapi.entity.Lamp;
 import com.example.smarthouseapi.entity.Room;
 import com.example.smarthouseapi.repository.RoomRepository;
 import com.example.smarthouseapi.service.interfaces.RoomServiceI;
+import com.mongodb.MongoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoomServiceImpl implements RoomServiceI {
@@ -25,8 +28,12 @@ public class RoomServiceImpl implements RoomServiceI {
     }
 
     @Override
-    public Room getOne(String id){
-        return roomRepository.findById(id).orElse(null);
+    public Optional<Room> getOne(String id){
+        Optional<Room> found = roomRepository.findById(id);
+        if (found.isEmpty()) {
+            return Optional.empty();
+        }
+        return found;
     }
 
     @Override
@@ -39,8 +46,13 @@ public class RoomServiceImpl implements RoomServiceI {
     }
 
     @Override
-    public String deleteRoom(String id) {
-        roomRepository.deleteById(id);
-        return "Room removed !!";
+    public Room deleteRoom(String id) {
+        if (roomRepository.findById(id).isPresent()){
+            Room room = roomRepository.findById(id).get();
+            roomRepository.delete(room);
+            return room;
+        }
+        else
+            throw new MongoException("Record not found");
     }
 }

@@ -1,5 +1,6 @@
 package com.example.smarthouseapi.service.impl;
 
+import com.example.smarthouseapi.entity.Room;
 import com.example.smarthouseapi.entity.User;
 import com.example.smarthouseapi.repository.UserRepository;
 import com.example.smarthouseapi.service.interfaces.UserServiceI;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserServiceI {
@@ -25,7 +27,12 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public User getOne(String id){
-        return userRepository.findById(id).orElse(null);
+    public Optional<User> getOne(String id){
+
+        Optional<User> found = userRepository.findById(id);
+        if (found.isEmpty()) {
+            return Optional.empty();
+        }
+        return found;
     }
 }
