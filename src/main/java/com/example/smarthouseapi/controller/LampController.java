@@ -24,19 +24,19 @@ public class LampController {
         return new ResponseEntity<>(LampService.getLampById(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/lamps")
+    @GetMapping(value = "/lamp/all")
     public ResponseEntity<List<Lamp>> getAllLamps(){
         List<Lamp> lamps = LampService.getAllLampRecords();
         return ResponseEntity.ok(lamps);
     }
 
-    @PostMapping(value = "/Lamps")
+    @PostMapping(value = "/lamp/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Lamp> createLamp(@RequestBody Lamp Lamp){
         return new ResponseEntity<>(LampService.saveLamp(Lamp), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/lamps/{id}")
+    @PutMapping(value = "/lamp/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Lamp> updateLamp(@RequestBody Lamp Lamp, @PathVariable(value = "id") String id){
         return new ResponseEntity<>(LampService.updateLampInfo(id,Lamp), HttpStatus.OK);

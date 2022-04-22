@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
+@RequestMapping(value = "/api")
 public class FloorController {
 
     @Autowired
@@ -21,13 +23,13 @@ public class FloorController {
         return new ResponseEntity<>(floorService.getFloorById(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/floors")
+    @GetMapping(value = "/floor/all")
     public ResponseEntity<List<Floor>> getAllFloors(){
         List<Floor> floors = floorService.getAllFloorRecords();
         return ResponseEntity.ok(floors);
     }
 
-    @PostMapping(value = "/floor")
+    @PostMapping(value = "/floor/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Floor> createFloor(@RequestBody Floor floor){
         return new ResponseEntity<>(floorService.saveFloor(floor), HttpStatus.CREATED);

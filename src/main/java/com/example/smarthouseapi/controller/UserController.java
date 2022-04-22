@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private UserServiceImpl UserService;
 
-    @GetMapping(value = "/User/{id}")
+    @GetMapping(value = "/user/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Optional<User>> getUser(@PathVariable(value = "id") String id){
         return new ResponseEntity<>(UserService.getOne(id), HttpStatus.OK);
@@ -30,7 +30,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PostMapping(value = "/Users")
+    @PostMapping(value = "/users")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<User> createUser(@RequestBody User User){
         return new ResponseEntity<>(UserService.addUser(User), HttpStatus.CREATED);

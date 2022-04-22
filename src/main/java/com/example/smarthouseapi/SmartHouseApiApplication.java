@@ -8,25 +8,25 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SmartHouseApiApplication implements CommandLineRunner {
+public class SmartHouseApiApplication {
+//implements CommandLineRunner
+   // private final HouseRepository houseRepository;
 
-    private final HouseRepository houseRepository;
-
-    @Autowired
+    /*@Autowired
     public SmartHouseApiApplication(HouseRepository houseRepository){
         this.houseRepository=houseRepository;
-    }
+    }*/
     public static void main(String[] args) {
         SpringApplication.run(SmartHouseApiApplication.class, args);
     }
 
-    @Override
+    /*@Override
     public  void  run(String... args) throws  Exception{
 
         if (houseRepository.findAll().isEmpty()){
             houseRepository.save(new House("new1"));
             houseRepository.save(new House("new2"));
         }
-    }
+    }*/
 
 }

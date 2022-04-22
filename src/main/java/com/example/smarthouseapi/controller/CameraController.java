@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
+@RequestMapping(value = "/api")
 public class CameraController {
     @Autowired
     private CameraServiceImpl cameraService;
@@ -21,13 +23,13 @@ public class CameraController {
         return new ResponseEntity<>(cameraService.getCameraById(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/cameras")
+    @GetMapping(value = "/camera/all")
     public ResponseEntity<List<Camera>> getAllCameras(){
         List<Camera> cameras = cameraService.getAllCameraRecords();
         return ResponseEntity.ok(cameras);
     }
 
-    @PostMapping(value = "/camera")
+    @PostMapping(value = "/camera/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Camera> createCamera(@RequestBody Camera camera){
         return new ResponseEntity<>(cameraService.saveCamera(camera), HttpStatus.CREATED);
