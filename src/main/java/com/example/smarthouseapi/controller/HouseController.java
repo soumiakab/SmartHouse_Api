@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,6 +21,12 @@ public class HouseController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Optional<House>> getHouse(@PathVariable(value = "id") String id){
         return new ResponseEntity<>(houseService.getHouseById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/houses")
+    public ResponseEntity<List<House>> getAllHouses(){
+        List<House> houses = houseService.getAllHouseRecords();
+        return ResponseEntity.ok(houses);
     }
 
     @PostMapping(value = "/house")

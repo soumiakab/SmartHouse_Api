@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 public class FloorController {
@@ -18,6 +19,12 @@ public class FloorController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Optional<Floor>> getFloor(@PathVariable(value = "id") String id){
         return new ResponseEntity<>(floorService.getFloorById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/floors")
+    public ResponseEntity<List<Floor>> getAllFloors(){
+        List<Floor> floors = floorService.getAllFloorRecords();
+        return ResponseEntity.ok(floors);
     }
 
     @PostMapping(value = "/floor")

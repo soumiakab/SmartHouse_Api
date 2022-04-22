@@ -1,5 +1,6 @@
 package com.example.smarthouseapi.controller;
 
+import com.example.smarthouseapi.entity.House;
 import com.example.smarthouseapi.entity.Lamp;
 import com.example.smarthouseapi.service.impl.LampServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,6 +22,12 @@ public class LampController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Optional<Lamp>> getLamp(@PathVariable(value = "id") String id){
         return new ResponseEntity<>(LampService.getLampById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/lamps")
+    public ResponseEntity<List<Lamp>> getAllLamps(){
+        List<Lamp> lamps = LampService.getAllLampRecords();
+        return ResponseEntity.ok(lamps);
     }
 
     @PostMapping(value = "/Lamps")
