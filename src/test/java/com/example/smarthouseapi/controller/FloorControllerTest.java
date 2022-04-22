@@ -1,11 +1,13 @@
 package com.example.smarthouseapi.controller;
 
 import com.example.smarthouseapi.entity.Floor;
+import com.example.smarthouseapi.repository.FloorRepository;
 import com.example.smarthouseapi.service.impl.FloorServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,6 +33,9 @@ class FloorControllerTest {
 
     @MockBean
     private FloorServiceImpl floorService;
+
+    @MockBean
+    private FloorRepository floorRepository;
 
     Floor floor1 ;
     Floor floor2;
@@ -74,10 +79,11 @@ class FloorControllerTest {
     @Test
     void deleteFloor() throws Exception {
        // when(floorService.getFloorById(floor1.getId())).thenReturn(Optional.ofNullable(floor1));
+         Mockito.lenient().when(floorRepository.findById(floor1.getId())).thenReturn(Optional.of(floor1));
+
         when(floorService.deleteFloorRecord(floor1.getId())).thenReturn(floor1);
         mockMvc.perform(delete("/api/floor/delete/" + floor1.getId())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                        .contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
