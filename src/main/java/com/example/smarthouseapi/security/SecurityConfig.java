@@ -22,6 +22,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     public final UserDetailsService userDetailsService;
 
     public final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -39,8 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.formLogin();
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/user/**")
-                .authenticated();
+                .antMatchers(HttpMethod.POST,"/api/user/register").permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/api/house").authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorisationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

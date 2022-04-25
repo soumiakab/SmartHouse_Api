@@ -1,9 +1,6 @@
 package com.example.smarthouseapi.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document
+@ToString
 public class User {
 
     @Id
@@ -25,6 +23,4 @@ public class User {
     @Field
     private String password;
 
-    @DBRef
-    private House house;
 }

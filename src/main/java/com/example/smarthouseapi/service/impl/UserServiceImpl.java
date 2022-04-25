@@ -5,6 +5,7 @@ import com.example.smarthouseapi.entity.User;
 import com.example.smarthouseapi.repository.UserRepository;
 import com.example.smarthouseapi.service.interfaces.UserServiceI;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserServiceI , UserDetailsService {
@@ -35,6 +37,7 @@ public class UserServiceImpl implements UserServiceI , UserDetailsService {
     @Override
     public User addUser(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        log.info(String.valueOf(user));
         return userRepository.save(user);
     }
 
@@ -51,10 +54,11 @@ public class UserServiceImpl implements UserServiceI , UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user =this.userRepository.findByUserName(username);
+        log.info("user name"+username);
         Collection<SimpleGrantedAuthority> authorities=new ArrayList<>();
         //add user roles
-        if(user.getHouse()!=null)
-                authorities.add(new SimpleGrantedAuthority(user.getHouse().getId()));
+        //if(user.getHouse().getId()!=null)
+                authorities.add(new SimpleGrantedAuthority("user"));
         return new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(),authorities);
     }
 }

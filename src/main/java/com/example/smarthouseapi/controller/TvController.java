@@ -12,25 +12,25 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/tv")
 public class TvController {
 
     @Autowired
     private TvServiceImpl TvService;
 
-    @GetMapping(value = "/Tv/{id}")
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Optional<Tv>> getTv(@PathVariable(value = "id") String id){
         return new ResponseEntity<>(TvService.getOne(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/tvs")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<Tv>> getAllLamps(){
         List<Tv> tvs = TvService.getAll();
         return ResponseEntity.ok(tvs);
     }
 
-    @PostMapping(value = "/Tvs")
+    @PostMapping(value = "/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Tv> createTv(@RequestBody Tv Tv){
         return new ResponseEntity<>(TvService.addTv(Tv), HttpStatus.CREATED);

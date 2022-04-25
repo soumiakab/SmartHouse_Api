@@ -20,6 +20,9 @@ public class House {
     private String name;
 
     @DBRef
+    User user;
+
+    @DBRef
     private List<Floor> floors;
 
     public House(){

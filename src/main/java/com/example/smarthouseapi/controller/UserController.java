@@ -12,25 +12,25 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/user")
 public class UserController {
 
     @Autowired
     private UserServiceImpl UserService;
 
-    @GetMapping(value = "/user/{id}")
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Optional<User>> getUser(@PathVariable(value = "id") String id){
         return new ResponseEntity<>(UserService.getOne(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = UserService.getAll();
         return ResponseEntity.ok(users);
     }
 
-    @PostMapping(value = "/users")
+    @PostMapping(value = "/register")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<User> createUser(@RequestBody User User){
         return new ResponseEntity<>(UserService.addUser(User), HttpStatus.CREATED);
