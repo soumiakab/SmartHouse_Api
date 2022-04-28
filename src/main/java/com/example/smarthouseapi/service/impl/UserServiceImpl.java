@@ -20,12 +20,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Service
+@Service("userServiceImpl")
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserServiceI , UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
 
