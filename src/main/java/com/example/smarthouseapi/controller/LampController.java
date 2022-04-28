@@ -12,37 +12,37 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/lamp")
 public class LampController {
 
     @Autowired
     private LampServiceImpl LampService;
 
-    @GetMapping(value = "/Lamp/{id}")
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Optional<Lamp>> getLamp(@PathVariable(value = "id") String id){
         return new ResponseEntity<>(LampService.getLampById(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/lamp/all")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<Lamp>> getAllLamps(){
         List<Lamp> lamps = LampService.getAllLampRecords();
         return ResponseEntity.ok(lamps);
     }
 
-    @PostMapping(value = "/lamp/add")
+    @PostMapping(value = "/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Lamp> createLamp(@RequestBody Lamp Lamp){
         return new ResponseEntity<>(LampService.saveLamp(Lamp), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/lamp/{id}")
+    @PutMapping(value = "/update/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Lamp> updateLamp(@RequestBody Lamp Lamp, @PathVariable(value = "id") String id){
         return new ResponseEntity<>(LampService.updateLampInfo(id,Lamp), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/lamp/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Lamp> deleteLamp(@PathVariable(value="id") String id){
         return new ResponseEntity<>(LampService.deleteLampRecord(id), HttpStatus.OK);

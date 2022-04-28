@@ -36,13 +36,13 @@ public class TvController {
         return new ResponseEntity<>(TvService.addTv(Tv), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/Tvs/{id}")
+    @PutMapping(value = "/update/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Tv> updateTv(@RequestBody Tv Tv, @PathVariable(value = "id") String id){
         return new ResponseEntity<>(TvService.updateTv(Tv), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/Tv/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Tv> deleteTv(@PathVariable(value="id") String id){
         return new ResponseEntity<>(TvService.deleteTv(id), HttpStatus.OK);

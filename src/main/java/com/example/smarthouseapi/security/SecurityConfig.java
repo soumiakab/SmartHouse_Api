@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/api/user/register").permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/house").authenticated();
+                .antMatchers("/api/house/**","/api/user/**","/api/floor/**","/api/room/**").authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorisationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

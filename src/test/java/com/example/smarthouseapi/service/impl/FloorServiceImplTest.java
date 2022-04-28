@@ -31,6 +31,7 @@ class FloorServiceImplTest {
 
     @Mock
     private FloorRepository floorRepository;
+
     Floor floor1 ;
     Floor floor2 ;
     List<Floor> floors;

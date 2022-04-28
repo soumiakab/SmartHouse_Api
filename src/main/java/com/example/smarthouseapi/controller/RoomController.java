@@ -12,37 +12,37 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/room")
 public class RoomController {
 
     @Autowired
     private RoomServiceImpl RoomService;
 
-    @GetMapping(value = "/Room/{id}")
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Optional<Room>> getRoom(@PathVariable(value = "id") String id){
         return new ResponseEntity<>(RoomService.getOne(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/rooms")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<Room>> getAllRooms(){
         List<Room> rooms = RoomService.getAll();
         return ResponseEntity.ok(rooms);
     }
 
-    @PostMapping(value = "/Rooms")
+    @PostMapping(value = "/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Room> createRoom(@RequestBody Room Room){
         return new ResponseEntity<>(RoomService.addRoom(Room), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/Rooms/{id}")
+    @PutMapping(value = "/update/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Room> updateRoom(@RequestBody Room Room, @PathVariable(value = "id") String id){
         return new ResponseEntity<>(RoomService.updateRoom(Room), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/Room/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Room> deleteRoom(@PathVariable(value="id") String id){
         return new ResponseEntity<>(RoomService.deleteRoom(id), HttpStatus.OK);
